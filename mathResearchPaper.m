@@ -1,0 +1,1 @@
+randomListWithNInversions(10, 100);
