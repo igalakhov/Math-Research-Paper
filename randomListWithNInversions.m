@@ -21,9 +21,21 @@ function [outList] = randomListWithNInversions(listLength, numInversions)
     end
   inversionList = [0 inversionList];
   
+  %step 2, create list based on calculated inversions
   outList = [];
+  for i = 1:listLength
+    curInversion = inversionList(i);
+    if curInversion == 0
+      outList = [outList i];
+    elseif curInversion == length(outList)
+      outList = [i outList];
+    else 
+      outList = [outList(1 : (length(outList) - curInversion)) i outList((length(outList) - curInversion + 1) : end)];
+      end
+    end
 end
 %helper functions
 function [out] = addAllUpTo(a) out = ((a/2)*(a-1)); end
 function [out] = upperBound(x) out =  x + x*(x-1)/2; end
 function [out] = lowerBound(x) out = 1 + x*(x-1)/2; end
+  
