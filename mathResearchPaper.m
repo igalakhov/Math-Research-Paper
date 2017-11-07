@@ -4,18 +4,33 @@ Math research paper
 The effect of number of inversion in a list on the runtime complexity of various
   sorting algorithms. 
 %}
-<<<<<<< HEAD
-tempList = randomListWithNInversions(10000, 0);
-[out temp] = quicksort(tempList);
-disp("number of steps it took");
-disp(temp);
-=======
 
-%small test about counting inversions
-
-tests = [];
-for i = 0:50
-  tests = [tests (i*99 == countInversions(randomListWithNInversions(100, i*99)))];
+numtrials = 55;
+trialsPer = 1;
+arrSize = 100;
+quickSortVals = [];
+insertionVals = [];
+selectionVals = [];
+for i = 0:numtrials - 1
+  tempQuickVals = [];
+  tempInsertionVals = [];
+  tempSelectionVals = [];
+  for j = 1:trialsPer 
+    tempList = randomListWithNInversions(arrSize, (arrSize*arrSize/2)*(i)/(numtrials));
+    [dummy numQuick] = quicksort(tempList);
+    [dummy numIns] = insertionSort(tempList);
+    [dummy numSelec] = selectionSort(tempList);
+    tempQuickVals = [tempQuickVals numQuick];
+    tempInsertionVals = [tempInsertionVals numIns];
+    tempSelectionVals = [tempSelectionVals numSelec];
   end
-disp(tests); %should be all ones
->>>>>>> 2d2e91e7e474b82179b6b8c06e9fff530f427e9c
+  quickSortVals = [quickSortVals mean(tempQuickVals)];
+  insertionVals = [insertionVals mean(tempInsertionVals)];
+  selectionVals = [selectionVals mean(tempSelectionVals)];
+end
+xLable = (0:numtrials - 1)/numtrials;
+plot(xLable, quickSortVals);
+hold on;
+plot(xLable, insertionVals);
+hold on;
+plot(xLable, selectionVals);
