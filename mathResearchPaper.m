@@ -4,7 +4,7 @@ Math research paper
 The effect of number of inversion in a list on the runtime complexity of various
   sorting algorithms. 
 %}
-
+%{
 numtrials = 55;
 trialsPer = 1;
 arrSize = 100;
@@ -34,3 +34,5 @@ hold on;
 plot(xLable, insertionVals);
 hold on;
 plot(xLable, selectionVals);
+%}
+quicksort(randomListWithNInversions(100, 100*100/8));

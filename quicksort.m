@@ -10,6 +10,7 @@ Note that this function is not recursive and instead uses a stack to simulate re
 
 function [sorted numSteps] = quicksort(listIn)
   numSteps = 0;
+  dispList = [listIn'];
   
   %partitions listI from hi to lo inclusive, usus
   function [partitioned pivotPos] = partition(toPartition, lo, hi)
@@ -57,6 +58,8 @@ function [sorted numSteps] = quicksort(listIn)
    curLo = stack(2:2);
    stack = stack(3:end);
    
+   dispList = [dispList sorted'];
+   
    %partition the list
    [sorted pivotPos] = partition(sorted, curLo, curHi);
    
@@ -70,5 +73,7 @@ function [sorted numSteps] = quicksort(listIn)
     end
  
   end
+  dispList = [dispList sorted'];
+  imagesc(dispList);
   
 end
